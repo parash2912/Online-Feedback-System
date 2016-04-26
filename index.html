@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+<head>
+  <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+</head>
+	<body>
+			{{user_email}} has logged in as {{user_type}}!
+			<a href="/">Logout</a>
+	</body>
+</html>
+{% endautoescape %}
+

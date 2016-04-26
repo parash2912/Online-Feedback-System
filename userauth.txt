@@ -1,0 +1,3 @@
+pj671@nyu.edu	pass	student
+sj1826@nyu.edu	word	student
+jcf@nyu.edu	softee	faculty

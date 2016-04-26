@@ -1,0 +1,14 @@
+<HTML>
+	<BODY>
+		{% if prev_attempt=='true': %}
+			Login failed!
+		{% endif %}
+		<form id='form-login'action="/login" method="POST">
+		Email : <input type="text" name="user_email" required>
+		<br>
+		<br>
+		Password : <input type="password" name="user_password" required>
+		<input type="submit" value="Login">
+		</form>
+	</BODY>
+</HTML>
