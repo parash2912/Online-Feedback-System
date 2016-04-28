@@ -1,14 +1,21 @@
+<!DOCTYPE html>
+{% autoescape true %}
 <HTML>
+	<HEAD>
+		<link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+	</HEAD>
 	<BODY>
 		{% if prev_attempt=='true': %}
 			Login failed!
 		{% endif %}
 		<form id='form-login'action="/login" method="POST">
-		Email : <input type="text" name="user_email" required>
+		Email : &nbsp &nbsp &nbsp <input type="text" name="user_email" required>
 		<br>
 		<br>
 		Password : <input type="password" name="user_password" required>
-		<input type="submit" value="Login">
+		<br> <br> <input type="submit" value="Login">
 		</form>
 	</BODY>
 </HTML>
+{% endautoescape %}
