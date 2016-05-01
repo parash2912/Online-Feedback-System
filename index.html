@@ -6,23 +6,23 @@
   <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 </head>
 	<body>
-		{% if user_type!='faculty': %}
-			<form id='form-student' action="/student" method="POST">
-				<input type="hidden" name="user_email" value={{user_email}}>
-			</form>
-			
-			<script type="text/javascript">
-				document.getElementById('form-student').submit(); // SUBMIT FORM
-			</script>
-		{% endif %}
-		
-		{% if user_type=='faculty': %}
-			<form id='form-faculty' action="/faculty" method="POST">
+		{% if 'faculty' == user_type: %}
+			<form id="form-faculty" action="/faculty" method="POST">
 				<input type="hidden" name="user_email" value={{user_email}}>
 			</form>
 			
 			<script type="text/javascript">
 				document.getElementById('form-faculty').submit(); // SUBMIT FORM
+			</script>
+		{% endif %}
+		
+		{% if 'student' == user_type: %}
+			<form id="form-student" action="/student" method="POST">
+				<input type="hidden" name="user_email" value={{user_email}}>
+			</form>
+			
+			<script type="text/javascript">
+				document.getElementById('form-student').submit(); // SUBMIT FORM
 			</script>
 		{% endif %}
 	</body>

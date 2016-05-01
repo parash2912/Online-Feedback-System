@@ -6,7 +6,10 @@
 		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 	</head>
 	<body>
-		{{user_email}} logged in as student!
+		{{user_email}} is enrolled in:
+		{% for course in courses: %} 
+			<br> {{course}}
+		{% endfor %}
 		<br> <a href="/">Logout</a>
 	</body>
 </html>
