@@ -45,6 +45,27 @@ def load():
 	
 load()
 
+class StudentHome(webapp2.RequestHandler):
+	def post(self):
+		user_email=self.request.get('user_email')
+		template_values={
+			'user_email': user_email,
+		}
+			
+		template = JINJA_ENVIRONMENT.get_template('studentHome.html')
+		self.response.write(template.render(template_values))
+		
+class FacultyHome(webapp2.RequestHandler):
+	def post(self):
+		user_email=self.request.get('user_email')
+		template_values={
+			'user_email': user_email,
+		}
+			
+		template = JINJA_ENVIRONMENT.get_template('facultyHome.html')
+		self.response.write(template.render(template_values))
+
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
 		#self.response.write('Hello world!')
@@ -73,5 +94,7 @@ class MainHandler(webapp2.RequestHandler):
 			
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-	('/login', Auth)
+	('/login', Auth),
+	('/student', StudentHome),
+	('/faculty', FacultyHome)
 ], debug=True)
