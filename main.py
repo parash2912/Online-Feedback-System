@@ -26,6 +26,8 @@ from user_authentication import Auth
 from user_authentication import Users
 from student_courses import CoursesEnrolled
 from student_courses import StudentHome
+from faculty_courses import CoursesTaken
+from faculty_courses import FacultyHome
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -71,16 +73,24 @@ def load_student_courses():
 load_student_courses()
 
 
+def load_faculty_courses():
+	lines=list(open(os.path.join(os.path.split(__file__)[0], 'facultyCourses.txt')))
+	for line in lines:
+		words = line.split("\t")
+		email = words[0]
+		name = words[1]
+		course = words[2]
+		courseSem = words[3]
+		faculty_temp = CoursesTaken()
+		faculty_temp.email = email
+		faculty_temp.name = name
+		faculty_temp.course_taken = course;
+		faculty_temp.course_sem = courseSem;
 		
-class FacultyHome(webapp2.RequestHandler):
-	def post(self):
-		user_email=self.request.get('user_email')
-		template_values={
-			'user_email': user_email,
-		}
-			
-		template = JINJA_ENVIRONMENT.get_template('facultyHome.html')
-		self.response.write(template.render(template_values))
+		faculty_temp.put()
+		
+		
+load_faculty_courses()
 
 
 class MainHandler(webapp2.RequestHandler):

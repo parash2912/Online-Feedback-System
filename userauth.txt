@@ -4,3 +4,5 @@ jcf@nyu.edu	softee	faculty
 ay937@nyu.edu	ashish	student
 nn899@nyu.edu	nikita	student
 rs4773@nyu.edu	ritu	student
+mno@nyu.edu	mohan	faculty
+pcb@nyu.edu	prithvi	faculty
