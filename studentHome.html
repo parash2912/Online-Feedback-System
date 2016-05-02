@@ -8,7 +8,11 @@
 	<body>
 		{{user_email}} is enrolled in:
 		{% for course in courses: %} 
-			<br> {{course}}
+			<form id="feedback-{{course}}" action="/createFeedback" method="POST">
+				<input type="hidden" name="user_email" value={{user_email}}>
+				<input type="hidden" name="course" value={{course}}>
+			</form>
+			<br> <a href="#" onclick=document.getElementById('feedback-{{course}}').submit()>{{course}}</a>
 		{% endfor %}
 		<br> <a href="/">Logout</a>
 	</body>

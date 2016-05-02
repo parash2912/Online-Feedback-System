@@ -82,7 +82,17 @@ class FacultyHome(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('facultyHome.html')
 		self.response.write(template.render(template_values))
 
-
+class CreateFeedback(webapp2.RequestHandler):
+	def post(self):
+		user_email=self.request.get('user_email')
+		course=self.request.get('course')
+		template_values = {
+			'user_email': user_email,
+			'course': course
+		}
+		template = JINJA_ENVIRONMENT.get_template('feedbackForm.html')
+		self.response.write(template.render(template_values))
+		
 class MainHandler(webapp2.RequestHandler):
     def get(self):
 		#self.response.write('Hello world!')
@@ -113,5 +123,6 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
 	('/login', Auth),
 	('/student', StudentHome),
-	('/faculty', FacultyHome)
+	('/faculty', FacultyHome),
+	('/createFeedback', CreateFeedback)
 ], debug=True)
