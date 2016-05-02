@@ -4,6 +4,7 @@ import os
 from google.appengine.ext import ndb
 import jinja2
 import webapp2
+from student_feedback import StudentSubmitted
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -20,9 +21,13 @@ class StudentHome(webapp2.RequestHandler):
 		course_query = CoursesEnrolled.query(CoursesEnrolled.email == user_email)
 		courses_fetched = course_query.fetch()
 		courses = courses_fetched[0].courses_enrolled.split(" ")
+		feedback_query = StudentSubmitted.query(StudentSubmitted.email == user_email)
+		feedback_submitted = feedback_query.fetch()
+		
 		template_values={
 			'user_email': user_email,
-			'courses': courses
+			'courses': courses,
+			'feedbacks': feedback_submitted
 		}
 			
 		template = JINJA_ENVIRONMENT.get_template('studentHome.html')

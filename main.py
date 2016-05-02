@@ -26,8 +26,13 @@ from user_authentication import Auth
 from user_authentication import Users
 from student_courses import CoursesEnrolled
 from student_courses import StudentHome
+<<<<<<< HEAD
 from faculty_courses import CoursesTaken
 from faculty_courses import FacultyHome
+=======
+from student_feedback import StudentSubmitted
+from course_feedback import CourseFeedback
+>>>>>>> 66b13c948e6f43eea67be7d052ea33e2b071606d
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -72,6 +77,7 @@ def load_student_courses():
 	
 load_student_courses()
 
+<<<<<<< HEAD
 
 def load_faculty_courses():
 	lines=list(open(os.path.join(os.path.split(__file__)[0], 'facultyCourses.txt')))
@@ -91,8 +97,59 @@ def load_faculty_courses():
 		
 		
 load_faculty_courses()
+=======
+class FacultyHome(webapp2.RequestHandler):
+	def post(self):
+		user_email=self.request.get('user_email')
+		template_values={
+			'user_email': user_email,
+		}
+			
+		template = JINJA_ENVIRONMENT.get_template('facultyHome.html')
+		self.response.write(template.render(template_values))
+>>>>>>> 66b13c948e6f43eea67be7d052ea33e2b071606d
 
-
+class CreateFeedback(webapp2.RequestHandler):
+	def post(self):
+		user_email=self.request.get('user_email')
+		course=self.request.get('course')
+		template_values = {
+			'user_email': user_email,
+			'course': course
+		}
+		template = JINJA_ENVIRONMENT.get_template('feedbackForm.html')
+		self.response.write(template.render(template_values))
+		
+class SubmitFeedback(webapp2.RequestHandler):
+	def post(self):
+		user_email=self.request.get('user_email')
+		course=self.request.get('course')
+		student_submitted = StudentSubmitted()
+		student_submitted.email = user_email
+		student_submitted.course = course
+		student_submitted.put()
+		
+		courseFeedback = CourseFeedback()
+		courseFeedback.course = course
+		courseFeedback.instructor_ability=int(self.request.get('instructor_ability'))
+		courseFeedback.clarity=int(self.request.get('clarity'))
+		courseFeedback.blackboard=int(self.request.get('blackboard'))
+		courseFeedback.lecture_quality=int(self.request.get('lecture_quality'))
+		courseFeedback.prepare_degree=int(self.request.get('prepare_degree'))
+		courseFeedback.instructor_rating=int(self.request.get('instructor_rating'))
+		courseFeedback.textbook_usefulness=int(self.request.get('textbook_usefulness'))
+		courseFeedback.difficulty=int(self.request.get('difficulty'))
+		courseFeedback.coursework_amount=int(self.request.get('coursework_amount'))
+		courseFeedback.pace=int(self.request.get('pace'))
+		courseFeedback.put()
+		template_values = {
+			'user_email': user_email,
+			'user_type': 'student'
+		}
+		template = JINJA_ENVIRONMENT.get_template('index.html')
+		self.response.write(template.render(template_values))
+		
+		
 class MainHandler(webapp2.RequestHandler):
     def get(self):
 		#self.response.write('Hello world!')
@@ -123,5 +180,7 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
 	('/login', Auth),
 	('/student', StudentHome),
-	('/faculty', FacultyHome)
+	('/faculty', FacultyHome),
+	('/createFeedback', CreateFeedback),
+	('/submitFeedback', SubmitFeedback)
 ], debug=True)
