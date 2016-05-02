@@ -26,6 +26,8 @@ from user_authentication import Auth
 from user_authentication import Users
 from student_courses import CoursesEnrolled
 from student_courses import StudentHome
+from student_feedback import StudentSubmitted
+from course_feedback import CourseFeedback
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -70,8 +72,6 @@ def load_student_courses():
 	
 load_student_courses()
 
-
-		
 class FacultyHome(webapp2.RequestHandler):
 	def post(self):
 		user_email=self.request.get('user_email')
@@ -92,6 +92,36 @@ class CreateFeedback(webapp2.RequestHandler):
 		}
 		template = JINJA_ENVIRONMENT.get_template('feedbackForm.html')
 		self.response.write(template.render(template_values))
+		
+class SubmitFeedback(webapp2.RequestHandler):
+	def post(self):
+		user_email=self.request.get('user_email')
+		course=self.request.get('course')
+		student_submitted = StudentSubmitted()
+		student_submitted.email = user_email
+		student_submitted.course = course
+		student_submitted.put()
+		
+		courseFeedback = CourseFeedback()
+		courseFeedback.course = course
+		courseFeedback.instructor_ability=int(self.request.get('instructor_ability'))
+		courseFeedback.clarity=int(self.request.get('clarity'))
+		courseFeedback.blackboard=int(self.request.get('blackboard'))
+		courseFeedback.lecture_quality=int(self.request.get('lecture_quality'))
+		courseFeedback.prepare_degree=int(self.request.get('prepare_degree'))
+		courseFeedback.instructor_rating=int(self.request.get('instructor_rating'))
+		courseFeedback.textbook_usefulness=int(self.request.get('textbook_usefulness'))
+		courseFeedback.difficulty=int(self.request.get('difficulty'))
+		courseFeedback.coursework_amount=int(self.request.get('coursework_amount'))
+		courseFeedback.pace=int(self.request.get('pace'))
+		courseFeedback.put()
+		template_values = {
+			'user_email': user_email,
+			'user_type': 'student'
+		}
+		template = JINJA_ENVIRONMENT.get_template('index.html')
+		self.response.write(template.render(template_values))
+		
 		
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -124,5 +154,6 @@ app = webapp2.WSGIApplication([
 	('/login', Auth),
 	('/student', StudentHome),
 	('/faculty', FacultyHome),
-	('/createFeedback', CreateFeedback)
+	('/createFeedback', CreateFeedback),
+	('/submitFeedback', SubmitFeedback)
 ], debug=True)

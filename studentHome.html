@@ -7,12 +7,20 @@
 	</head>
 	<body>
 		{{user_email}} is enrolled in:
-		{% for course in courses: %} 
-			<form id="feedback-{{course}}" action="/createFeedback" method="POST">
-				<input type="hidden" name="user_email" value={{user_email}}>
-				<input type="hidden" name="course" value={{course}}>
-			</form>
-			<br> <a href="#" onclick=document.getElementById('feedback-{{course}}').submit()>{{course}}</a>
+		{% for course in courses: %}
+			<script>
+			var a = false;
+			{% for feedback in feedbacks: %}
+				{% if feedback.course==course: %}
+					a=true;
+					break;
+				{% endif %}
+			{% endfor %}
+			if(!a) {
+				document.body.innerHTML += "<form id='feedback-{{course}}' action='/createFeedback' method='POST'><input type='hidden' name='user_email' value={{user_email}}><input type='hidden' name='course' value={{course}}></form><br><a href='#' onclick=document.getElementById('feedback-{{course}}').submit()>{{course}}</a>";
+			}
+			</script>
+			
 		{% endfor %}
 		<br> <a href="/">Logout</a>
 	</body>
