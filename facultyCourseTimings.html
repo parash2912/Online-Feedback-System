@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+		<link type="text/css" rel="styltsheet" href="/stylesheets/main.css" />
+	</head>
+	<body>
+		Days for this course in this semester
+		{% for course in courses: %}
+		<form id='feedback-{{ course.course_id }}' action='/facultyFeedbackReport' method='POST'>
+			<input type='hidden' name='user_email' value={{user_email}}>
+			<input type='hidden' name='course_id' value={{course.course_id}}>
+		</form>
+		<a href='#' onclick=document.getElementById('feedback-{{course.course_id}}').submit()>{{course.course_day}}</a> 
+		{% endfor %}
+		<br> <a href="/">Logout</a>
+	</body>
+{% endautoescape %}

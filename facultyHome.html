@@ -7,8 +7,12 @@
 	</head>
 	<body>
 		{{user_email}} logged in as faculty!
-		{% for course in courses: %}
-			<br> {{ course.course_taken }}
+		{% for sem in courses: %}
+			<form id="feedback-{{sem.course_sem}}" action="/facultySemCourse" method="POST">
+				<input type="hidden" name="user_email" value={{user_email}}>
+				<input type="hidden" name="sem" value={{sem.course_sem}}>
+			</form>
+			<a href="#" onclick=document.getElementById("feedback-{{sem.course_sem}}").submit()>{{sem.course_sem}}</a>
 		{% endfor %}
 		<br> <a href="/">Logout</a>
 		

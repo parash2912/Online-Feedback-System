@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+		<link type="text/css" rel="styltsheet" href="/stylesheets/main.css" />
+	</head>
+	<body>
+		Courses taken in this semester
+		{% for course in courses: %}
+		<form id='feedback-{{ course.course_taken }}' action='/facultyCourseTimings' method='POST'>
+			<input type='hidden' name='user_email' value={{user_email}}>
+			<input type='hidden' name='sem' value={{course.course_sem}}>
+			<input type='hidden' name='course_id' value={{course.course_taken}}>
+		</form>
+		<a href='#' onclick=document.getElementById('feedback-{{course.course_taken}}').submit()>{{course.course_taken}}</a> 
+		{% endfor %}
+		<br> <a href="/">Logout</a>
+	</body>
+{% endautoescape %}

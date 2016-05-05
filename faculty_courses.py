@@ -15,17 +15,63 @@ class CoursesTaken(ndb.Model):
 	name=ndb.StringProperty()
 	course_taken=ndb.StringProperty()
 	course_sem=ndb.StringProperty()
-	
+
+class CourseTimings(ndb.Model):
+	email=ndb.StringProperty(indexed=True, required=True)
+	course_id=ndb.StringProperty()
+	course_name=ndb.StringProperty()
+	course_year=ndb.StringProperty()
+	course_day=ndb.StringProperty()
+	course_time=ndb.StringProperty()
 	
 class FacultyHome(webapp2.RequestHandler):
 	def post(self):
 		user_email = self.request.get('user_email')
-		courses = CoursesTaken.query(CoursesTaken.email == user_email)
-		courses_fetched = courses.fetch()
+		course_query = CoursesTaken.query(CoursesTaken.email == user_email)
+		course_fetched = course_query.fetch()
+		#course_sem = course_fetched.course_sem
 		template_values={
 			'user_email': user_email,
-			'courses': courses_fetched
+			'courses': course_fetched
 		}
 		
 		template = JINJA_ENVIRONMENT.get_template('facultyHome.html')
 		self.response.write(template.render(template_values))
+
+class FacultySemCourse(webapp2.RequestHandler):
+	def post(self):
+		user_email = self.request.get('user_email')
+		user_sem = self.request.get('sem')
+
+		course_query = CoursesTaken.query(CoursesTaken.email == user_email)
+		course_query2 = course_query.filter(CoursesTaken.course_sem == user_sem)
+		course_fetched = course_query2.fetch()
+
+		template_values={
+			'user_email': user_email,
+			'courses': course_fetched
+		}
+
+		template = JINJA_ENVIRONMENT.get_template('facultySemCourse.html')
+		self.response.write(template.render(template_values))
+
+
+class FacultyCourseTimings(webapp2.RequestHandler):
+	def post(self):
+		user_email = self.request.get('user_email')
+		user_course = self.request.get('course_id')
+		user_year = self.request.get('sem')
+
+		course_query = CourseTimings.query(CourseTimings.email == user_email, 
+						CourseTimings.course_id == user_course, 
+						CourseTimings.course_year == user_year)
+		course_fetched = course_query.fetch()
+
+		template_values={
+			'user_email' : user_email,
+			'courses' : course_fetched
+		}
+
+		template = JINJA_ENVIRONMENT.get_template('facultyCourseTimings.html')
+		self.response.write(template.render(template_values))
+

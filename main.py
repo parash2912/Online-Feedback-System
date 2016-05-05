@@ -30,6 +30,9 @@ from faculty_courses import CoursesTaken
 from faculty_courses import FacultyHome
 from student_feedback import StudentSubmitted
 from course_feedback import CourseFeedback
+from faculty_courses import FacultySemCourse
+from faculty_courses import CourseTimings
+from faculty_courses import FacultyCourseTimings
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -82,6 +85,7 @@ def load_faculty_courses():
 		name = words[1]
 		course = words[2]
 		courseSem = words[3]
+		courseSem = courseSem.replace("\n","")
 		faculty_temp = CoursesTaken()
 		faculty_temp.email = email
 		faculty_temp.name = name
@@ -92,6 +96,31 @@ def load_faculty_courses():
 		
 		
 load_faculty_courses()
+
+
+def load_faculty_course_timings():
+	lines=list(open(os.path.join(os.path.split(__file__)[0], 'facultyCourseTimings.txt')))
+	for line in lines:
+		words = line.split("\t")
+		email = words[0]
+		course_id = words[1]
+		course_name = words[2]
+		course_year = words[3]
+		course_day = words[4]
+		course_time = words[5]
+		course_time = course_time.replace("\n","")
+		faculty_temp = CourseTimings()
+		faculty_temp.email = email
+		faculty_temp.course_id = course_id
+		faculty_temp.course_name = course_name
+		faculty_temp.course_year = course_year
+		faculty_temp.course_day = course_day
+		faculty_temp.course_time = course_time
+		
+		faculty_temp.put()
+		
+		
+load_faculty_course_timings()
 
 class CreateFeedback(webapp2.RequestHandler):
 	def post(self):
@@ -166,5 +195,7 @@ app = webapp2.WSGIApplication([
 	('/student', StudentHome),
 	('/faculty', FacultyHome),
 	('/createFeedback', CreateFeedback),
-	('/submitFeedback', SubmitFeedback)
+	('/submitFeedback', SubmitFeedback),
+	('/facultySemCourse', FacultySemCourse),
+	('/facultyCourseTimings', FacultyCourseTimings)
 ], debug=True)
