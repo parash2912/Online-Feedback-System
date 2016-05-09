@@ -13,11 +13,7 @@
           <h1>Course Evaluation System</h1>
           </div>
         </div>
-        <div id="lower-padding">
-		<br> <a href="/">Logout</a>
-        </div>
-		{{user_email}} is enrolled in:
-        <div id="test">
+		<div id="enrolled">{{user_email}} is enrolled in:</div>
 		{% for course in courses: %}
 			<script>
 			var a = false;
@@ -29,14 +25,16 @@
 			{% endfor %}
 			if(!a) {
                 var div = document.createElement('div');
-                div.className = 'row';
+                div.className = 'rows';
 				div.innerHTML = "<form id='feedback-{{course}}' action='/createFeedback' method='POST'><input type='hidden' name='user_email' value={{user_email}}><input type='hidden' name='course' value={{course}}></form><br><a href='#' onclick=document.getElementById('feedback-{{course}}').submit()>{{course}}</a>";
 			}
                 document.getElementById('content').appendChild(div);
 			</script>
 			
 		{% endfor %}
-      </div>
+        <div id="lower-padding">
+		<br> <a href="/">Logout</a>
+        </div>
       </div>
 	</body>
 </html>
