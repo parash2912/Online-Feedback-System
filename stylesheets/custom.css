@@ -1,0 +1,47 @@
+html, body {
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  background-color: #57068C;
+  padding: 2% 2% 2% 2%;
+  word-wrap: break-word;
+  height: 100%;
+}
+
+#content {
+  background-color: #EFEFEF;
+  color: blue;
+  width: 100%;
+  height: 100%;
+  border: 4px solid black;
+}
+
+#banner {
+  height: 30%;
+  width: 42%;
+  margin: auto;
+}
+
+h1 {
+  color: black;
+}
+
+#upper-padding {
+  height: 33%;
+}
+
+#lower-padding {
+  height: 33%;
+}
+
+#form-login {
+  width: 30%;
+  margin: auto;
+  height: 34%;
+}
+
+#login {
+  width: 100%;
+}
+
+#password {
+  width: 100%;
+}
