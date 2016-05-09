@@ -4,8 +4,15 @@
 	<head>
 		<link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
 		<link type="text/css" rel="styltsheet" href="/stylesheets/main.css" />
+		<link type="text/css" rel="stylesheet" href="/stylesheets/custom.css" />
 	</head>
 	<body>
+        <div id="content">
+        <div id="upper-padding">
+          <div id="banner">
+          <h1>Course Evaluation System</h1>
+          </div>
+        </div>
 		Days for this course in this semester
 		{% for course in courses: %}
 		<form id='feedback-{{ course.course_id }}' action='/facultyFeedbackReport' method='POST'>
@@ -15,5 +22,7 @@
 		<a href='#' onclick=document.getElementById('feedback-{{course.course_id}}').submit()>{{course.course_day}}</a> 
 		{% endfor %}
 		<br> <a href="/">Logout</a>
+        <div id="lower-padding"></div>
+        </div>
 	</body>
 {% endautoescape %}

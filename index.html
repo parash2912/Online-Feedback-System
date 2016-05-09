@@ -4,8 +4,15 @@
 <head>
   <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
   <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  <link type="text/css" rel="stylesheet" href="/stylesheets/custom.css" />
 </head>
 	<body>
+        <div id="content">
+        <div id="upper-padding">
+          <div id="banner">
+          <h1>Course Evaluation System</h1>
+          </div>
+        </div>
 		{% if 'faculty' == user_type: %}
 			<form id="form-faculty" action="/faculty" method="POST">
 				<input type="hidden" name="user_email" value={{user_email}}>
@@ -25,6 +32,8 @@
 				document.getElementById('form-student').submit(); // SUBMIT FORM
 			</script>
 		{% endif %}
+        <div id="lower-padding"></div>
+        </div>
 	</body>
 </html>
 {% endautoescape %}

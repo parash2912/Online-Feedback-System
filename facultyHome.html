@@ -4,8 +4,15 @@
 	<head>
 		<link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+		<link type="text/css" rel="stylesheet" href="/stylesheets/custom.css" />
 	</head>
 	<body>
+        <div id="content">
+        <div id="upper-padding">
+          <div id="banner">
+          <h1>Course Evaluation System</h1>
+          </div>
+        </div>
 		{{user_email}} logged in as faculty!
 		{% for sem in courses: %}
 			<form id="feedback-{{sem.course_sem}}" action="/facultySemCourse" method="POST">
@@ -17,6 +24,8 @@
 		<br> <a href="/">Logout</a>
 		
 		<br><br> {{user_type}}
+        <div id="lower-padding"></div>
+        </div>
 	</body>
 </html>
 {% endautoescape %}

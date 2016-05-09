@@ -4,9 +4,16 @@
 	<HEAD>
 		<link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+		<link type="text/css" rel="stylesheet" href="/stylesheets/custom.css" />
 	</HEAD>
 	
 	<BODY>
+        <div id="content">
+        <div id="upper-padding">
+          <div id="banner">
+          <h1>Course Evaluation System</h1>
+          </div>
+        </div>
 		{{course}} <br><br><br>
 		<form id="feedback-form" action="/submitFeedback" method="POST">
 			<input type="hidden" name="user_email" value={{user_email}}>
@@ -122,6 +129,8 @@
 			<br><br>
 			<input type="submit" value="Submit">
 		</form>	
+        <div id="lower-padding"></div>
+        </div>
 	</BODY>
 </HTML>
 {% endautoescape %}

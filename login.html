@@ -2,18 +2,20 @@
 {% autoescape true %}
 <HTML>
 	<HEAD>
-		<link type="text/css" rel="stylesheet" href="/stylesheets/custom.css" />
+        <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+        <link type="text/css" rel="stylesheet" href="/stylesheets/custom.css" />
 	</HEAD>
 	<BODY>
-		{% if prev_attempt=='true': %}
-			Login failed!
-		{% endif %}
         <div id="content">
         <div id="upper-padding">
           <div id="banner">
           <h1>Course Evaluation System</h1>
           </div>
         </div>
+		{% if prev_attempt=='true': %}
+			Login failed!
+		{% endif %}
 		<form id='form-login' action="/login" method="POST">
 		<div id="login">Email<br/><input type="text" name="user_email" style="width: 100%" required></div>
 		<br/>
@@ -21,6 +23,8 @@
 		<br/>
         <input type="submit" value="Login" style="color: blue;">
 		</form>
+        <div id="lower-padding"></div>
+        </div>
         <div id="lower-padding"></div>
         </div>
 	</BODY>

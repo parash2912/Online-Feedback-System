@@ -4,9 +4,20 @@
 	<head>
 		<link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+		<link type="text/css" rel="stylesheet" href="/stylesheets/custom.css" />
 	</head>
 	<body>
+        <div id="content">
+        <div id="upper-padding">
+          <div id="banner">
+          <h1>Course Evaluation System</h1>
+          </div>
+        </div>
+        <div id="lower-padding">
+		<br> <a href="/">Logout</a>
+        </div>
 		{{user_email}} is enrolled in:
+        <div id="test">
 		{% for course in courses: %}
 			<script>
 			var a = false;
@@ -17,12 +28,16 @@
 				{% endif %}
 			{% endfor %}
 			if(!a) {
-				document.body.innerHTML += "<form id='feedback-{{course}}' action='/createFeedback' method='POST'><input type='hidden' name='user_email' value={{user_email}}><input type='hidden' name='course' value={{course}}></form><br><a href='#' onclick=document.getElementById('feedback-{{course}}').submit()>{{course}}</a>";
+                var div = document.createElement('div');
+                div.className = 'row';
+				div.innerHTML = "<form id='feedback-{{course}}' action='/createFeedback' method='POST'><input type='hidden' name='user_email' value={{user_email}}><input type='hidden' name='course' value={{course}}></form><br><a href='#' onclick=document.getElementById('feedback-{{course}}').submit()>{{course}}</a>";
 			}
+                document.getElementById('content').appendChild(div);
 			</script>
 			
 		{% endfor %}
-		<br> <a href="/">Logout</a>
+      </div>
+      </div>
 	</body>
 </html>
 {% endautoescape %}
