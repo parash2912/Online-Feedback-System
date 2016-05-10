@@ -14,17 +14,22 @@
           <h1>Course Evaluation System</h1>
           </div>
         </div>
-		Courses taken in this semester
+		<div id="enrolled">Courses taken in this semester<br/><br/><br/></div>
 		{% for course in courses: %}
+        <div id="rows">
 		<form id='feedback-{{ course.course_taken }}' action='/facultyCourseTimings' method='POST'>
 			<input type='hidden' name='user_email' value={{user_email}}>
 			<input type='hidden' name='sem' value={{course.course_sem}}>
 			<input type='hidden' name='course_id' value={{course.course_taken}}>
 		</form>
 		<a href='#' onclick=document.getElementById('feedback-{{course.course_taken}}').submit()>{{course.course_taken}}</a> 
-		{% endfor %}
-		<br> <a href="/">Logout</a>
-        <div id="lower-padding"></div>
         </div>
+        <br/>
+		{% endfor %}
+        <div id="lower-padding">
+        <br/><br/><div id="buttonlink"><a href="/" style="color: #333;">Logout</a></div>
+        </div>
+      </div>
 	</body>
+</html>
 {% endautoescape %}
