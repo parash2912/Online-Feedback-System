@@ -17,13 +17,16 @@ html, body {
 
 #banner {
   height: 30%;
-  width: 47%;
+  width: 100%;
   margin: auto;
   padding-bottom: 6%;
+  text-align: center;
 }
 
 h1 {
   color: black;
+  background: #E3E4FA;
+  padding-left: 2%;
 }
 
 #upper-padding {
@@ -80,9 +83,4 @@ h1 {
 #blue-text {
   color: blue;
   line-height: 0;
-}
-
-h1 {
-  background: #E3E4FA;
-  padding-left: 2%;
 }
