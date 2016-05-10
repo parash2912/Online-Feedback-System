@@ -17,7 +17,7 @@ html, body {
 
 #banner {
   height: 30%;
-  width: 46%;
+  width: 47%;
   margin: auto;
   padding-bottom: 6%;
 }
@@ -84,4 +84,5 @@ h1 {
 
 h1 {
   background: #E3E4FA;
+  padding-left: 2%;
 }

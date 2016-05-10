@@ -13,19 +13,22 @@
           <h1>Course Evaluation System</h1>
           </div>
         </div>
-		{{user_email}} logged in as faculty!
+		<div id="enrolled">{{user_email}} logged in as faculty!<br/><br/><br/></div>
 		{% for sem in courses: %}
+            <div id="rows">
 			<form id="feedback-{{sem.course_sem}}" action="/facultySemCourse" method="POST">
 				<input type="hidden" name="user_email" value={{user_email}}>
 				<input type="hidden" name="sem" value={{sem.course_sem}}>
 			</form>
 			<a href="#" onclick=document.getElementById("feedback-{{sem.course_sem}}").submit()>{{sem.course_sem}}</a>
+            </div>
+            <br/>
 		{% endfor %}
-		<br> <a href="/">Logout</a>
-		
-		<br><br> {{user_type}}
-        <div id="lower-padding"></div>
+        <div id="lower-padding">
+        <br/><br/><div id="buttonlink"><a href="/" style="color: #333;">Logout</a></div>
+		{{user_type}}
         </div>
+      </div>
 	</body>
 </html>
 {% endautoescape %}
