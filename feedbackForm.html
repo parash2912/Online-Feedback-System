@@ -14,53 +14,57 @@
           <h1>Course Evaluation System</h1>
           </div>
         </div>
-		{{course}} <br><br><br>
+		<div id="enrolled">{{course}}<br/><br/></div>
 		<form id="feedback-form" action="/submitFeedback" method="POST">
 			<input type="hidden" name="user_email" value={{user_email}}>
 			<input type="hidden" name="course" value={{course}}>
 			<br>
-			This evaluation will be tallied, typed and presented to your instructor. This form is completely anonymous. Please provide honest feedback, so as to help us improve the course.
-			
+			<i style="color: red;">** Your feedback is completely anonymous. Please provide honest feedback in order to help us improve the course.</i>
+			<br/>
+			<br/><br/>
+			<div id="blue-text">Given the nature of the material, rate ability of instructor to keep the presentation interesting:</div>
+			<br/>
+			<input type="radio" name="instructor_ability" value="1"> Poor &nbsp;
+			<input type="radio" name="instructor_ability" value="2"> Fair &nbsp;
+			<input type="radio" name="instructor_ability" value="3"> Satisfactory &nbsp;
+			<input type="radio" name="instructor_ability" value="4"> Good &nbsp;
+			<input type="radio" name="instructor_ability" value="5"> Excellent &nbsp;
 			<br><br>
-			Given the nature of the material, rate ability of instructor to keep the presentation interesting:
+			<br/>
+			<div id="blue-text">Clarity of explanations:</div>
 			<br>
-			<input type="radio" name="instructor_ability" value="1"> Poor
-			<input type="radio" name="instructor_ability" value="2"> Fair
-			<input type="radio" name="instructor_ability" value="3"> Satisfactory
-			<input type="radio" name="instructor_ability" value="4"> Good
-			<input type="radio" name="instructor_ability" value="5"> Excellent
+			<input type="radio" name="clarity" value="1"> Poor &nbsp;
+			<input type="radio" name="clarity" value="2"> Fair &nbsp;
+			<input type="radio" name="clarity" value="3"> Satisfactory &nbsp;
+			<input type="radio" name="clarity" value="4"> Good &nbsp;
+			<input type="radio" name="clarity" value="5"> Excellent &nbsp;
 			<br><br>
-			Clarity of explanations:
+			<br/>
+			<div id="blue-text">Blackboard presentation:</div>
 			<br>
-			<input type="radio" name="clarity" value="1"> Poor
-			<input type="radio" name="clarity" value="2"> Fair
-			<input type="radio" name="clarity" value="3"> Satisfactory
-			<input type="radio" name="clarity" value="4"> Good
-			<input type="radio" name="clarity" value="5"> Excellent
+			<input type="radio" name="blackboard" value="1"> Poor &nbsp;
+			<input type="radio" name="blackboard" value="2"> Fair &nbsp;
+			<input type="radio" name="blackboard" value="3"> Satisfactory &nbsp;
+			<input type="radio" name="blackboard" value="4"> Good &nbsp;
+			<input type="radio" name="blackboard" value="5"> Excellent &nbsp;
 			<br><br>
-			Blackboard presentation:
+			<br/>
+			<div id="blue-text">Overall quality of lecture:</div>
 			<br>
-			<input type="radio" name="blackboard" value="1"> Poor
-			<input type="radio" name="blackboard" value="2"> Fair
-			<input type="radio" name="blackboard" value="3"> Satisfactory
-			<input type="radio" name="blackboard" value="4"> Good
-			<input type="radio" name="blackboard" value="5"> Excellent
+			<input type="radio" name="lecture_quality" value="1"> Poor &nbsp;
+			<input type="radio" name="lecture_quality" value="2"> Fair &nbsp;
+			<input type="radio" name="lecture_quality" value="3"> Satisfactory &nbsp;
+			<input type="radio" name="lecture_quality" value="4"> Good &nbsp;
+			<input type="radio" name="lecture_quality" value="5"> Excellent &nbsp;
 			<br><br>
-			Overall quality of lecture:
+			<br/>
+			<div id="blue-text">Degree of preparedness:</div>
 			<br>
-			<input type="radio" name="lecture_quality" value="1"> Poor
-			<input type="radio" name="lecture_quality" value="2"> Fair
-			<input type="radio" name="lecture_quality" value="3"> Satisfactory
-			<input type="radio" name="lecture_quality" value="4"> Good
-			<input type="radio" name="lecture_quality" value="5"> Excellent
-			<br><br>
-			Degree of preparedness:
-			<br>
-			<input type="radio" name="prepare_degree" value="1"> Poor
-			<input type="radio" name="prepare_degree" value="2"> Fair
-			<input type="radio" name="prepare_degree" value="3"> Satisfactory
-			<input type="radio" name="prepare_degree" value="4"> Good
-			<input type="radio" name="prepare_degree" value="5"> Excellent
+			<input type="radio" name="prepare_degree" value="1"> Poor &nbsp;
+			<input type="radio" name="prepare_degree" value="2"> Fair &nbsp;
+			<input type="radio" name="prepare_degree" value="3"> Satisfactory &nbsp;
+			<input type="radio" name="prepare_degree" value="4"> Good &nbsp;
+			<input type="radio" name="prepare_degree" value="5"> Excellent &nbsp;
 		<!--	<br><br>
 			Availability of instructor for consultation:
 			<br>
@@ -71,13 +75,14 @@
 			<input type="radio" name="q6" value="5"> -->
 			
 			<br><br> 
-			Rating of instructor:
+			<br/>
+			<div id="blue-text">Rating of instructor:</div>
 			<br>
-			<input type="radio" name="instructor_rating" value="1"> Poor
-			<input type="radio" name="instructor_rating" value="2"> Fair
-			<input type="radio" name="instructor_rating" value="3"> Satisfactory
-			<input type="radio" name="instructor_rating" value="4"> Good
-			<input type="radio" name="instructor_rating" value="5"> Excellent
+			<input type="radio" name="instructor_rating" value="1"> Poor &nbsp;
+			<input type="radio" name="instructor_rating" value="2"> Fair &nbsp;
+			<input type="radio" name="instructor_rating" value="3"> Satisfactory &nbsp;
+			<input type="radio" name="instructor_rating" value="4"> Good &nbsp;
+			<input type="radio" name="instructor_rating" value="5"> Excellent &nbsp;
 		<!--	<br><br>
 			Fairness and appropriateness of exams:
 			<br>
@@ -95,39 +100,44 @@
 			<input type="radio" name="q9" value="4">
 			<input type="radio" name="q9" value="5"> -->
 			<br><br>
-			Usefulness of textbook:
+			<br/>
+			<div id="blue-text">Usefulness of textbook:</div>
 			<br>
-			<input type="radio" name="textbook_usefulness" value="1"> Poor
-			<input type="radio" name="textbook_usefulness" value="2"> Fair
-			<input type="radio" name="textbook_usefulness" value="3"> Satisfactory
-			<input type="radio" name="textbook_usefulness" value="4"> Good
-			<input type="radio" name="textbook_usefulness" value="5"> Excellent
+			<input type="radio" name="textbook_usefulness" value="1"> Poor &nbsp;
+			<input type="radio" name="textbook_usefulness" value="2"> Fair &nbsp;
+			<input type="radio" name="textbook_usefulness" value="3"> Satisfactory &nbsp;
+			<input type="radio" name="textbook_usefulness" value="4"> Good &nbsp;
+			<input type="radio" name="textbook_usefulness" value="5"> Excellent &nbsp;
 			<br><br>
-			Perceived difficulty:
+			<br/>
+			<div id="blue-text">Perceived difficulty:</div>
 			<br>
-			<input type="radio" name="difficulty" value="1"> far too easy
-			<input type="radio" name="difficulty" value="2"> too easy
-			<input type="radio" name="difficulty" value="3"> reasonable level
-			<input type="radio" name="difficulty" value="4"> too difficult
-			<input type="radio" name="difficulty" value="5"> far too difficult
+			<input type="radio" name="difficulty" value="1"> Far too easy &nbsp;
+			<input type="radio" name="difficulty" value="2"> Too easy &nbsp;
+			<input type="radio" name="difficulty" value="3"> Reasonable level &nbsp;
+			<input type="radio" name="difficulty" value="4"> Too difficult &nbsp;
+			<input type="radio" name="difficulty" value="5"> Far too difficult &nbsp;
 			<br><br>
-			Amount of coursework:
+			<br/>
+			<div id="blue-text">Amount of coursework:</div>
 			<br>
-			<input type="radio" name="coursework_amount" value="1"> far too little
-			<input type="radio" name="coursework_amount" value="2"> too little
-			<input type="radio" name="coursework_amount" value="3"> reasonable amount
-			<input type="radio" name="coursework_amount" value="4"> too much
-			<input type="radio" name="coursework_amount" value="5"> far too much
+			<input type="radio" name="coursework_amount" value="1"> Far too little &nbsp;
+			<input type="radio" name="coursework_amount" value="2"> Too little &nbsp;
+			<input type="radio" name="coursework_amount" value="3"> Reasonable amount &nbsp;
+			<input type="radio" name="coursework_amount" value="4"> Too much &nbsp;
+			<input type="radio" name="coursework_amount" value="5"> Far too much &nbsp;
 			<br><br>
-			Pace:
+			<br/>
+			<div id="blue-text">Pace:</div>
 			<br>
-			<input type="radio" name="pace" value="1"> far too slow
-			<input type="radio" name="pace" value="2"> too slow
-			<input type="radio" name="pace" value="3"> reasonable pace
-			<input type="radio" name="pace" value="4"> too fast
-			<input type="radio" name="pace" value="5"> far too fast
+			<input type="radio" name="pace" value="1"> Far too slow &nbsp;
+			<input type="radio" name="pace" value="2"> Too slow &nbsp;
+			<input type="radio" name="pace" value="3"> Reasonable pace &nbsp;
+			<input type="radio" name="pace" value="4"> Too fast &nbsp;
+			<input type="radio" name="pace" value="5"> Far too fast &nbsp;
 			<br><br>
-			<input type="submit" value="Submit">
+			<br/>
+            <div id="buttonlink"><input type="submit" value="Submit" style="color: #333; background: none; border: none; margin: 0; padding: 0;"></div>
 		</form>	
         <div id="lower-padding"></div>
         </div>
