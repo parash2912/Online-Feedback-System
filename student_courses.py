@@ -20,7 +20,10 @@ class StudentHome(webapp2.RequestHandler):
 		user_email=self.request.get('user_email')
 		course_query = CoursesEnrolled.query(CoursesEnrolled.email == user_email)
 		courses_fetched = course_query.fetch()
-		courses = courses_fetched[0].courses_enrolled.split(" ")
+		if len(courses_fetched) == 0:
+			courses=[]
+		else:
+			courses = courses_fetched[0].courses_enrolled.split(" ")
 		feedback_query = StudentSubmitted.query(StudentSubmitted.email == user_email)
 		feedback_submitted = feedback_query.fetch()
 		

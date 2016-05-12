@@ -40,86 +40,89 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 	autoescape=True)
 
 def load_user_pass():
-	lines=list(open(os.path.join(os.path.split(__file__)[0], 'userauth.txt')))
-	for line in lines:
-		words = line.split("\t")
-		email = words[0]
-		password = words[1]
-		type = words[2]
-		type = type.replace("\n","")
-		user_temp = Users()
-		user_temp.email = email
-		user_temp.password = password
-		user_temp.type = type
-		user_temp.put()
+	user_query=Users.query()
+	users=user_query.fetch()
+	if len(users)==0:
+		lines=list(open(os.path.join(os.path.split(__file__)[0], 'userauth.txt')))
+		for line in lines:
+			words = line.split("\t")
+			email = words[0]
+			password = words[1]
+			type = words[2]
+			type = type.replace("\n","")
+			user_temp = Users()
+			user_temp.email = email
+			user_temp.password = password
+			user_temp.type = type
+			user_temp.put()
 	
 load_user_pass()
 
 def load_student_courses():
-	lines=list(open(os.path.join(os.path.split(__file__)[0], 'studentCourses.txt')))
-	for line in lines:
-		words = line.split("\t")
-		email = words[0]
-		courseList = words[1]
-		student_temp = CoursesEnrolled()
-		student_temp.email = email
-		courseList = courseList.replace("\n","")
-		courses = courseList.split(" ")
-		course_index=0;
-		student_temp.courses_enrolled = courseList
-	
-	#	for course in courses:
-	#		if course != None:
-	#			student_temp.courses_enrolled[course_index] = course
-	#			course_index += 1
-		
-		student_temp.put()
+	courses_enrolled_query=CoursesEnrolled.query()
+	courses_enrolled_list=courses_enrolled_query.fetch()
+	if len(courses_enrolled_list)==0:
+		lines=list(open(os.path.join(os.path.split(__file__)[0], 'studentCourses.txt')))
+		for line in lines:
+			words = line.split("\t")
+			email = words[0]
+			courseList = words[1]
+			student_temp = CoursesEnrolled()
+			student_temp.email = email
+			courseList = courseList.replace("\n","")
+			courses = courseList.split(" ")
+			course_index=0;
+			student_temp.courses_enrolled = courseList
+			student_temp.put()
 	
 load_student_courses()
 
 def load_faculty_courses():
-	lines=list(open(os.path.join(os.path.split(__file__)[0], 'facultyCourses.txt')))
-	for line in lines:
-		words = line.split("\t")
-		email = words[0]
-		name = words[1]
-		course = words[2]
-		courseSem = words[3]
-		courseSem = courseSem.replace("\n","")
-		faculty_temp = CoursesTaken()
-		faculty_temp.email = email
-		faculty_temp.name = name
-		faculty_temp.course_taken = course;
-		faculty_temp.course_sem = courseSem;
-		
-		faculty_temp.put()
-		
+	courses_taken_query=CoursesTaken.query()
+	courses_taken=courses_taken_query.fetch()
+	if len(courses_taken)==0:
+		lines=list(open(os.path.join(os.path.split(__file__)[0], 'facultyCourses.txt')))
+		for line in lines:
+			words = line.split("\t")
+			email = words[0]
+			name = words[1]
+			course = words[2]
+			courseSem = words[3]
+			courseSem = courseSem.replace("\n","")
+			faculty_temp = CoursesTaken()
+			faculty_temp.email = email
+			faculty_temp.name = name
+			faculty_temp.course_taken = course;
+			faculty_temp.course_sem = courseSem;
+			faculty_temp.put()
 		
 load_faculty_courses()
 
 
 def load_faculty_course_timings():
-	lines=list(open(os.path.join(os.path.split(__file__)[0], 'facultyCourseTimings.txt')))
-	for line in lines:
-		words = line.split("\t")
-		email = words[0]
-		course_id = words[1]
-		course_name = words[2]
-		course_year = words[3]
-		course_day = words[4]
-		course_time = words[5]
-		course_time = course_time.replace("\n","")
-		faculty_temp = CourseTimings()
-		faculty_temp.email = email
-		faculty_temp.course_id = course_id
-		faculty_temp.course_name = course_name
-		faculty_temp.course_year = course_year
-		faculty_temp.course_day = course_day
-		faculty_temp.course_time = course_time
+	course_timings_query=CourseTimings.query()
+	course_timings=course_timings_query.fetch()
+	if len(course_timings)==0:
+		lines=list(open(os.path.join(os.path.split(__file__)[0], 'facultyCourseTimings.txt')))
+		for line in lines:
+			words = line.split("\t")
+			email = words[0]
+			course_id = words[1]
+			course_name = words[2]
+			course_year = words[3]
+			course_day = words[4]
+			course_time = words[5]
+			course_time = course_time.replace("\n","")
+			faculty_temp = CourseTimings()
+			faculty_temp.email = email
+			faculty_temp.course_id = course_id
+			faculty_temp.course_name = course_name
+			faculty_temp.course_year = course_year
+			faculty_temp.course_day = course_day
+			faculty_temp.course_time = course_time
 		
-		faculty_temp.put()
-		
-		
+			faculty_temp.put()
+				
 load_faculty_course_timings()
 
 class CreateFeedback(webapp2.RequestHandler):
