@@ -18,7 +18,7 @@ class CoursesTaken(ndb.Model):
 
 class CourseTimings(ndb.Model):
 	email=ndb.StringProperty(indexed=True, required=True)
-	course_id=ndb.StringProperty()
+	course_id=ndb.StringProperty(indexed=True)
 	course_name=ndb.StringProperty()
 	course_year=ndb.StringProperty()
 	course_day=ndb.StringProperty()
@@ -29,7 +29,6 @@ class FacultyHome(webapp2.RequestHandler):
 		user_email = self.request.get('user_email')
 		course_query = CoursesTaken.query(CoursesTaken.email == user_email)
 		course_fetched = course_query.fetch()
-		#course_sem = course_fetched.course_sem
 		template_values={
 			'user_email': user_email,
 			'courses': course_fetched
