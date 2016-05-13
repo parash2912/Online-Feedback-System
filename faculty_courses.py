@@ -4,6 +4,7 @@ import os
 from google.appengine.ext import ndb
 import jinja2
 import webapp2
+from course_feedback import CourseFeedback
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -72,5 +73,23 @@ class FacultyCourseTimings(webapp2.RequestHandler):
 		}
 
 		template = JINJA_ENVIRONMENT.get_template('facultyCourseTimings.html')
+		self.response.write(template.render(template_values))
+
+
+class FacultyFeedbackReport(webapp2.RequestHandler):
+	def post(self):
+		#user_email = self.request.get('user_email')
+		#user_course = self.request.get('course_id')
+		user_date = self.request.get('course_day')
+
+		course_query = CourseFeedback.query(CourseFeedback.date_time == user_date)
+		course_fetched = course_query.fetch()
+
+		template_values={
+			'user_email' : user_email,
+			'courses' : course_fetched
+		}
+
+		template = JINJA_ENVIRONMENT.get_template('facultyFeedbackReport.html')
 		self.response.write(template.render(template_values))
 

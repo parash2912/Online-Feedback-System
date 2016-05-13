@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+		<link type="text/css" rel="styltsheet" href="/stylesheets/main.css" />
+		<link type="text/css" rel="stylesheet" href="/stylesheets/custom.css" />
+        <title>Course Evaluation System</title>
+	</head>
+	<body>
+        <div id="content">
+        <div id="upper-padding">
+          <div id="banner">
+          <h1>Course Evaluation System</h1>
+          </div>
+        </div>
+		<div id="enrolled">Days for this course in this semester:<br/><br/><br/></div>
+		<form id='feedback-{{ course.course }}' action='/facultyGenerate' method='POST'>
+		<table class="table table-striped">
+		<tr>
+		<td align="center"><h4> Instructor Ability </h4></td>
+		<td align="center"><h4> Clarity </h4></td>
+		<td align="center"><h4> Blackboard </h4></td>
+		<td align="center"><h4> Lecture Quality </h4></td>
+		<td align="center"><h4> Prepared Degree </h4></td>
+		<td align="center"><h4> Instructor Ratings </h4></td>
+		<td align="center"><h4> Textbook Usefulness </h4></td>
+		<td align="center"><h4> Difficulty </h4></td>
+		<td align="center"><h4> Coursework Amount </h4></td>
+		<td align="center"><h4> Pace </h4></td>
+		</tr>
+		{% for course in courses: %}
+			<tr>
+		    <td align="center">{{ course.1 }}</td>
+    		<td align="center">{{ course.2 }}</a></td>
+		    <td align="center">{{ course.3 }}</td>
+		    <td align="center">{{ course.4 }}</td>
+		    <td align="center">{{ course.5 }}</td>
+		    <td align="center">{{ course.6 }}</td>
+			<td align="center">{{ course.7 }}</td>
+			<td align="center">{{ course.8 }}</td>
+			<td align="center">{{ course.9 }}</td>
+			<td align="center">{{ course.10 }}</td>		
+		    </tr>
+		{% endfor %}
+		</table>
+		</form>
+		</div>
+
+		<!--
+        <div id="rows">
+		
+		
+		<a href='#' onclick=document.getElementById('feedback-{{course.course_id}}').submit()>{{course.course_day}}</a> 
+        </div>
+        <br/>
+        -->
+		
+        <div id="lower-padding">
+		<br/><div id="buttonlink"><a href="/" style="color: #333;">Logout</a></div>
+        </div>
+      </div>
+	</body>
+</html>
+{% endautoescape %}

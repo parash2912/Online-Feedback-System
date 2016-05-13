@@ -33,6 +33,7 @@ from course_feedback import CourseFeedback
 from faculty_courses import FacultySemCourse
 from faculty_courses import CourseTimings
 from faculty_courses import FacultyCourseTimings
+from faculty_courses import FacultyFeedbackReport
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -200,5 +201,6 @@ app = webapp2.WSGIApplication([
 	('/createFeedback', CreateFeedback),
 	('/submitFeedback', SubmitFeedback),
 	('/facultySemCourse', FacultySemCourse),
-	('/facultyCourseTimings', FacultyCourseTimings)
+	('/facultyCourseTimings', FacultyCourseTimings),
+	('/facultyFeedbackReport', FacultyFeedbackReport)
 ], debug=True)
