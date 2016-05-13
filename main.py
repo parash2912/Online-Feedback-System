@@ -17,6 +17,7 @@
 import cgi
 import urllib
 import os
+import thread
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import webapp2
@@ -33,6 +34,7 @@ from course_feedback import CourseFeedback
 from faculty_courses import FacultySemCourse
 from faculty_courses import CourseTimings
 from faculty_courses import FacultyCourseTimings
+from delete_feedback_submission import myThread
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -57,6 +59,9 @@ def load_user_pass():
 			user_temp.put()
 	
 load_user_pass()
+
+abc=myThread(1)
+abc.start()
 
 def load_student_courses():
 	courses_enrolled_query=CoursesEnrolled.query()
@@ -99,6 +104,7 @@ def load_faculty_courses():
 load_faculty_courses()
 
 
+
 def load_faculty_course_timings():
 	course_timings_query=CourseTimings.query()
 	course_timings=course_timings_query.fetch()
@@ -109,7 +115,7 @@ def load_faculty_course_timings():
 			email = words[0]
 			course_id = words[1]
 			course_name = words[2]
-			course_year = words[3]
+			course_sem = words[3]
 			course_day = words[4]
 			course_time = words[5]
 			course_time = course_time.replace("\n","")
@@ -117,7 +123,7 @@ def load_faculty_course_timings():
 			faculty_temp.email = email
 			faculty_temp.course_id = course_id
 			faculty_temp.course_name = course_name
-			faculty_temp.course_year = course_year
+			faculty_temp.course_sem = course_sem
 			faculty_temp.course_day = course_day
 			faculty_temp.course_time = course_time
 		
@@ -200,5 +206,5 @@ app = webapp2.WSGIApplication([
 	('/createFeedback', CreateFeedback),
 	('/submitFeedback', SubmitFeedback),
 	('/facultySemCourse', FacultySemCourse),
-	('/facultyCourseTimings', FacultyCourseTimings)
+	('/facultyCourseTimings', FacultyCourseTimings),
 ], debug=True)
