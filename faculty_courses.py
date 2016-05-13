@@ -21,7 +21,7 @@ class CourseTimings(ndb.Model):
 	email=ndb.StringProperty(indexed=True, required=True)
 	course_id=ndb.StringProperty(indexed=True)
 	course_name=ndb.StringProperty()
-	course_year=ndb.StringProperty()
+	course_sem=ndb.StringProperty(indexed=True)
 	course_day=ndb.StringProperty()
 	course_time=ndb.StringProperty()
 	
@@ -60,11 +60,11 @@ class FacultyCourseTimings(webapp2.RequestHandler):
 	def post(self):
 		user_email = self.request.get('user_email')
 		user_course = self.request.get('course_id')
-		user_year = self.request.get('sem')
+		user_sem = self.request.get('sem')
 
 		course_query = CourseTimings.query(CourseTimings.email == user_email, 
 						CourseTimings.course_id == user_course, 
-						CourseTimings.course_year == user_year)
+						CourseTimings.course_sem == user_sem)
 		course_fetched = course_query.fetch()
 
 		template_values={

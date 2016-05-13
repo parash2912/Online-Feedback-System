@@ -17,6 +17,7 @@
 import cgi
 import urllib
 import os
+import thread
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import webapp2
@@ -30,10 +31,16 @@ from faculty_courses import CoursesTaken
 from faculty_courses import FacultyHome
 from student_feedback import StudentSubmitted
 from course_feedback import CourseFeedback
+from course_feedback import CourseLastLecture
 from faculty_courses import FacultySemCourse
 from faculty_courses import CourseTimings
 from faculty_courses import FacultyCourseTimings
+<<<<<<< HEAD
 from faculty_courses import FacultyFeedbackReport
+=======
+from delete_feedback_submission import delete_feedback_submission_thread
+from update_last_lecture import update_last_lecture_thread
+>>>>>>> 8313c7a7ec42e8c834eabfccb9fc59bb1ce02238
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -58,6 +65,12 @@ def load_user_pass():
 			user_temp.put()
 	
 load_user_pass()
+
+delete_thread=delete_feedback_submission_thread(1)
+delete_thread.start()
+
+update_thread=update_last_lecture_thread(2)
+update_thread.start()
 
 def load_student_courses():
 	courses_enrolled_query=CoursesEnrolled.query()
@@ -100,6 +113,7 @@ def load_faculty_courses():
 load_faculty_courses()
 
 
+
 def load_faculty_course_timings():
 	course_timings_query=CourseTimings.query()
 	course_timings=course_timings_query.fetch()
@@ -110,7 +124,7 @@ def load_faculty_course_timings():
 			email = words[0]
 			course_id = words[1]
 			course_name = words[2]
-			course_year = words[3]
+			course_sem = words[3]
 			course_day = words[4]
 			course_time = words[5]
 			course_time = course_time.replace("\n","")
@@ -118,7 +132,7 @@ def load_faculty_course_timings():
 			faculty_temp.email = email
 			faculty_temp.course_id = course_id
 			faculty_temp.course_name = course_name
-			faculty_temp.course_year = course_year
+			faculty_temp.course_sem = course_sem
 			faculty_temp.course_day = course_day
 			faculty_temp.course_time = course_time
 		
@@ -146,6 +160,9 @@ class SubmitFeedback(webapp2.RequestHandler):
 		student_submitted.course = course
 		student_submitted.put()
 		
+		last_lecture_query = CourseLastLecture.query(CourseLastLecture.course==course)
+		last_lecture_list = last_lecture_query.fetch()
+		
 		courseFeedback = CourseFeedback()
 		courseFeedback.course = course
 		courseFeedback.instructor_ability=int(self.request.get('instructor_ability'))
@@ -158,6 +175,7 @@ class SubmitFeedback(webapp2.RequestHandler):
 		courseFeedback.difficulty=int(self.request.get('difficulty'))
 		courseFeedback.coursework_amount=int(self.request.get('coursework_amount'))
 		courseFeedback.pace=int(self.request.get('pace'))
+		courseFeedback.date_time=last_lecture_list[0].datetime
 		courseFeedback.put()
 		template_values = {
 			'user_email': user_email,
@@ -202,5 +220,8 @@ app = webapp2.WSGIApplication([
 	('/submitFeedback', SubmitFeedback),
 	('/facultySemCourse', FacultySemCourse),
 	('/facultyCourseTimings', FacultyCourseTimings),
+<<<<<<< HEAD
 	('/facultyFeedbackReport', FacultyFeedbackReport)
+=======
+>>>>>>> 8313c7a7ec42e8c834eabfccb9fc59bb1ce02238
 ], debug=True)
