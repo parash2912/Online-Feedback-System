@@ -6,6 +6,7 @@ import jinja2
 from google.appengine.ext import ndb
 from datetime import datetime
 from student_feedback import StudentSubmitted
+from course_feedback import CourseLastLecture
 from faculty_courses import CourseTimings
 import time
 import threading
@@ -28,7 +29,7 @@ weekdays[6]='Sunday'
 
 
 
-class myThread (threading.Thread):
+class delete_feedback_submission_thread (threading.Thread):
 	def __init__(self, threadID):
 		threading.Thread.__init__(self)
 		self.threadID = threadID
@@ -57,5 +58,6 @@ class myThread (threading.Thread):
 							end_minute=date_time.strftime('%M')
 							end_second=date_time.strftime('%S')
 							if (int(end_hour)==int(course_end_time_spl[0])) and (int(end_minute)==int(course_end_time_spl[1])) and (int(end_second)>=int(course_end_time_spl[2]) and int(end_second) <= int(course_end_time_spl[2])+10):
-								stud_sub.key.delete()	
+								stud_sub.key.delete()
+								
 			time.sleep(2)

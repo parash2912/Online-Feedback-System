@@ -31,10 +31,12 @@ from faculty_courses import CoursesTaken
 from faculty_courses import FacultyHome
 from student_feedback import StudentSubmitted
 from course_feedback import CourseFeedback
+from course_feedback import CourseLastLecture
 from faculty_courses import FacultySemCourse
 from faculty_courses import CourseTimings
 from faculty_courses import FacultyCourseTimings
-from delete_feedback_submission import myThread
+from delete_feedback_submission import delete_feedback_submission_thread
+from update_last_lecture import update_last_lecture_thread
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -60,8 +62,11 @@ def load_user_pass():
 	
 load_user_pass()
 
-abc=myThread(1)
-abc.start()
+delete_thread=delete_feedback_submission_thread(1)
+delete_thread.start()
+
+update_thread=update_last_lecture_thread(2)
+update_thread.start()
 
 def load_student_courses():
 	courses_enrolled_query=CoursesEnrolled.query()
@@ -151,6 +156,9 @@ class SubmitFeedback(webapp2.RequestHandler):
 		student_submitted.course = course
 		student_submitted.put()
 		
+		last_lecture_query = CourseLastLecture.query(CourseLastLecture.course==course)
+		last_lecture_list = last_lecture_query.fetch()
+		
 		courseFeedback = CourseFeedback()
 		courseFeedback.course = course
 		courseFeedback.instructor_ability=int(self.request.get('instructor_ability'))
@@ -163,6 +171,7 @@ class SubmitFeedback(webapp2.RequestHandler):
 		courseFeedback.difficulty=int(self.request.get('difficulty'))
 		courseFeedback.coursework_amount=int(self.request.get('coursework_amount'))
 		courseFeedback.pace=int(self.request.get('pace'))
+		courseFeedback.date_time=last_lecture_list[0].datetime
 		courseFeedback.put()
 		template_values = {
 			'user_email': user_email,
