@@ -35,12 +35,9 @@ from course_feedback import CourseLastLecture
 from faculty_courses import FacultySemCourse
 from faculty_courses import CourseTimings
 from faculty_courses import FacultyCourseTimings
-<<<<<<< HEAD
 from faculty_courses import FacultyFeedbackReport
-=======
 from delete_feedback_submission import delete_feedback_submission_thread
 from update_last_lecture import update_last_lecture_thread
->>>>>>> 8313c7a7ec42e8c834eabfccb9fc59bb1ce02238
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -220,8 +217,5 @@ app = webapp2.WSGIApplication([
 	('/submitFeedback', SubmitFeedback),
 	('/facultySemCourse', FacultySemCourse),
 	('/facultyCourseTimings', FacultyCourseTimings),
-<<<<<<< HEAD
 	('/facultyFeedbackReport', FacultyFeedbackReport)
-=======
->>>>>>> 8313c7a7ec42e8c834eabfccb9fc59bb1ce02238
 ], debug=True)
