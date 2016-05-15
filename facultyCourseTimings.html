@@ -15,14 +15,14 @@
           </div>
         </div>
 		<div id="enrolled">Classes taken in this semester:<br/><br/><br/></div>
-		{% for course in courses: %}
+		{% for date in dates: %}
         <div id="rows">
-		<form id='feedback-{{ course.course_id }}' action='/facultyFeedbackReport' method='POST'>
+		<form id='feedback-{{ course_id }}' action='/facultyFeedbackReport' method='POST'>
 			<input type='hidden' name='user_email' value={{user_email}}>
-			<input type='hidden' name='course_id' value={{course.course_id}}>
-			<input type='hidden' name='course_day' value={{course.course_day}}>
+			<input type='hidden' name='course_id' value={{course_id}}>
+			<input type='hidden' name='course_day' value={{date}}>
 		</form>
-		<a href='#' onclick=document.getElementById('feedback-{{course.course_id}}').submit()>{{course.course_day}}</a>
+		<a href='#' onclick=document.getElementById('feedback-{{course_id}}').submit()>{{date}}</a>
         </div>
         <br/>
 		{% endfor %}

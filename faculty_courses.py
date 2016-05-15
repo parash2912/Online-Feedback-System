@@ -66,14 +66,25 @@ class FacultyCourseTimings(webapp2.RequestHandler):
 		user_course = self.request.get('course_id')
 		user_sem = self.request.get('sem')
 
-		course_query = CourseTimings.query(CourseTimings.email == user_email,
-						CourseTimings.course_id == user_course,
-						CourseTimings.course_year == user_sem)
-		course_fetched = course_query.fetch()
+		#course_query = CourseTimings.query(CourseTimings.email == user_email,
+		#				CourseTimings.course_id == user_course,
+		#				CourseTimings.course_year == user_sem)
+		#course_fetched = course_query.fetch()
 
+		feedback_query=CourseFeedback.query(CourseFeedback.course==user_course,CourseFeedback.sem==user_sem)
+		feedbacks = feedback_query.fetch()
+		dates=[]
+		for feedback in feedbacks:
+			date_time=feedback.date_time
+			date=date_time.strftime("%Y-%m-%d")
+			if date not in dates:
+				dates.append(date)
+			
 		template_values={
 			'user_email' : user_email,
-			'courses' : course_fetched
+			'course_id' : user_course,
+			'course_sem' : user_sem,
+			'dates' : dates 
 		}
 
 		template = JINJA_ENVIRONMENT.get_template('facultyCourseTimings.html')

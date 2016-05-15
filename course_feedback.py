@@ -12,6 +12,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class CourseFeedback(ndb.Model):
 	course=ndb.StringProperty(indexed=True, required=True)
+	sem=ndb.StringProperty(indexed=True)
 	instructor_ability=ndb.IntegerProperty()
 	clarity=ndb.IntegerProperty()
 	blackboard=ndb.IntegerProperty()

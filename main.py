@@ -67,11 +67,11 @@ def load_user_pass():
 
 load_user_pass()
 
-#delete_thread=delete_feedback_submission_thread(1)
-#delete_thread.start()
+delete_thread=delete_feedback_submission_thread(1)
+delete_thread.start()
 
-#update_thread=update_last_lecture_thread(2)
-#update_thread.start()
+update_thread=update_last_lecture_thread(2)
+update_thread.start()
 
 def load_student_courses():
 	courses_enrolled_query=CoursesEnrolled.query()
@@ -196,6 +196,7 @@ class SubmitFeedback(webapp2.RequestHandler):
 		courseFeedback.coursework_amount=int(self.request.get('coursework_amount'))
 		courseFeedback.pace=int(self.request.get('pace'))
 		courseFeedback.date_time=last_lecture_list[0].datetime
+		courseFeedback.sem=current_sem
 		courseFeedback.put()
 		template_values = {
 			'user_email': user_email,
