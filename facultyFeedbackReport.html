@@ -14,7 +14,8 @@
           <h1>Course Evaluation System</h1>
           </div>
         </div>
-		<div id="enrolled">Feedbacks : <br/><br/><br/></div>
+		<div id="enrolled">Feedbacks:<br/><br/><br/></div>
+        <div id="rows">
 		<form id='feedback' action='/facultyGenerate' method='POST'>
 		<table class="table table-striped">
 		<tr>
@@ -47,7 +48,8 @@
 		{% endfor %}
 		</table>
 		</form>
-		</div>
+        </div>
+        <br/>
         <div id="lower-padding">
 		<br/><div id="buttonlink"><a href="/" style="color: #333;">Logout</a></div>
         </div>
