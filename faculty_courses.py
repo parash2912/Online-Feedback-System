@@ -26,7 +26,7 @@ class CourseTimings(ndb.Model):
 	course_id=ndb.StringProperty(indexed=True)
 	course_name=ndb.StringProperty()
 	course_year=ndb.StringProperty(indexed=True)
-	course_day=ndb.DateTimeProperty()#ndb.StringProperty()
+	course_day=ndb.StringProperty()
 	course_time=ndb.StringProperty()
 
 class FacultyHome(webapp2.RequestHandler):

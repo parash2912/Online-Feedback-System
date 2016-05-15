@@ -1,6 +1,7 @@
-jcf@nyu.edu	CSCI-GA.001	Software Engineering	F2014	2016-05-13 02:13:39	19:00:00-21:00:00
-jcf@nyu.edu	CSCI-GA.001	Software Engineering	F2014	2016-05-12 02:13:39	19:00:00-21:00:00
-jcf@nyu.edu	CSCI-GA.003	Software Engineering	S2011	2016-05-12 02:13:39	19:00:00-21:00:00
-jcf@nyu.edu	CSCI-GA.002	Software Engineering	F2011	2016-05-12 02:13:39	19:00:00-21:00:00
-jcf@nyu.edu	CSCI-GA.003	Software Engineering	SU2014	2016-05-12 02:13:39	17:00:00-19:00:00
-mno@nyu.edu	CSCI-GA.005	Future of Robotics	F2016	2016-05-12 02:13:39	06:15:00-07:26:00
+jcf@nyu.edu	CSCI-GA.001	Software Engineering	F2014	Monday	19:00:00-21:00:00
+jcf@nyu.edu	CSCI-GA.001	Software Engineering	F2014	Monday	19:00:00-21:00:00
+jcf@nyu.edu	CSCI-GA.003	Software Engineering	S2011	Tuesday	19:00:00-21:00:00
+jcf@nyu.edu	CSCI-GA.002	Software Engineering	F2011	Thursday	19:00:00-21:00:00
+jcf@nyu.edu	CSCI-GA.003	Software Engineering	SU2014	Wednesday	17:00:00-19:00:00
+mno@nyu.edu	CSCI-GA.005	Future of Robotics	F2016	Monday	06:15:00-07:26:00
+pcb@nyu.edu	CSCI-GA.004	Game Development	F2016	Thursday	13:00:00-15:00:00

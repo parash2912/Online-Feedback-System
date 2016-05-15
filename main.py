@@ -39,11 +39,14 @@ from faculty_courses import FacultyCourseTimings
 from faculty_courses import FacultyFeedbackReport
 from delete_feedback_submission import delete_feedback_submission_thread
 from update_last_lecture import update_last_lecture_thread
+from datetime import datetime
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
 	extensions=['jinja2.ext.autoescape'],
 	autoescape=True)
+	
+current_sem='F2016'
 
 def load_user_pass():
 	user_query=Users.query()
@@ -124,7 +127,7 @@ def load_faculty_course_timings():
 			course_name = words[2]
 			course_sem = words[3]
 			course_day = words[4]
-			course_day_new = datetime.datetime.strptime(course_day, "%Y-%m-%d %H:%M:%S")
+			#course_day_new = datetime.strptime(course_day, "%Y-%m-%d %H:%M:%S")
 			course_time = words[5]
 			course_time = course_time.replace("\n","")
 			faculty_temp = CourseTimings()
@@ -132,12 +135,30 @@ def load_faculty_course_timings():
 			faculty_temp.course_id = course_id
 			faculty_temp.course_name = course_name
 			faculty_temp.course_year = course_sem
-			faculty_temp.course_day = course_day_new
+			faculty_temp.course_day = course_day
 			faculty_temp.course_time = course_time
 
 			faculty_temp.put()
 
 load_faculty_course_timings()
+
+
+def initialize_last_lectures():
+	date_sem_start=datetime.strptime('2016-01-26 00:00:00', '%Y-%m-%d %H:%M:%S')
+	course_last_lectures_query=CourseLastLecture.query()
+	last_lects=course_last_lectures_query.fetch()
+	if len(last_lects)==0:
+		courses_query=CourseTimings.query()
+		courses=courses_query.fetch()
+		for course in courses:
+			if course.course_year==current_sem:
+				last_lect=CourseLastLecture()
+				last_lect.course=course.course_id
+				last_lect.datetime=date_sem_start
+				last_lect.put()
+			
+initialize_last_lectures()
+
 
 class CreateFeedback(webapp2.RequestHandler):
 	def post(self):

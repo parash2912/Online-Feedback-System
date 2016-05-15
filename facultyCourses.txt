@@ -8,4 +8,5 @@ pcb@nyu.edu	Prithvi Raj Chauhan	CSCI-GA.006	F2015
 mno@nyu.edu	Manmohan Singh	CSCI-GA.008	SU2016
 pcb@nyu.edu	Prithvi Raj Chauhan	CSCI-GA.007	F2014
 mno@nyu.edu	Manmohan Singh	CSCI-GA.009	S2015
+mno@nyu.edu	Manmohan Singh	CSCI-GA.005	F2016
 jcf@nyu.edu	Jean Claude Franchitti	CSCI-GA.003	S2011
