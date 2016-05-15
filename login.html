@@ -14,14 +14,15 @@
           <h1>Course Evaluation System</h1>
           </div>
         </div>
-		{% if prev_attempt=='true': %}
-			Login failed!
-		{% endif %}
 		<form id='form-login' action="/login" method="POST">
 		<div id="login">Email<br/><input type="text" name="user_email" style="width: 100%" required></div>
 		<br/>
 		<div id="password">Password<br/><input type="password" name="user_password" style="width: 100%;" required></div>
-		<br/>
+		{% if prev_attempt=='true': %}
+			<div style="color: red">Login failed!</div>
+		{% else %}
+			<br/>
+		{% endif %}
         <br/>
         <div id="buttonlink"><input type="submit" value="Login" style="color: #333; background: none; border: none; margin: 0; padding: 0;"></div>
 		</form>
