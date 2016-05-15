@@ -23,6 +23,7 @@ from google.appengine.ext import ndb
 import webapp2
 import jinja2 
 import logging
+import datetime
 from user_authentication import Auth
 from user_authentication import Users
 from student_courses import CoursesEnrolled
@@ -35,12 +36,9 @@ from course_feedback import CourseLastLecture
 from faculty_courses import FacultySemCourse
 from faculty_courses import CourseTimings
 from faculty_courses import FacultyCourseTimings
-<<<<<<< HEAD
 from faculty_courses import FacultyFeedbackReport
-=======
 from delete_feedback_submission import delete_feedback_submission_thread
 from update_last_lecture import update_last_lecture_thread
->>>>>>> 8313c7a7ec42e8c834eabfccb9fc59bb1ce02238
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -66,11 +64,11 @@ def load_user_pass():
 	
 load_user_pass()
 
-delete_thread=delete_feedback_submission_thread(1)
-delete_thread.start()
+#delete_thread=delete_feedback_submission_thread(1)
+#delete_thread.start()
 
-update_thread=update_last_lecture_thread(2)
-update_thread.start()
+#update_thread=update_last_lecture_thread(2)
+#update_thread.start()
 
 def load_student_courses():
 	courses_enrolled_query=CoursesEnrolled.query()
@@ -126,14 +124,15 @@ def load_faculty_course_timings():
 			course_name = words[2]
 			course_sem = words[3]
 			course_day = words[4]
+			course_day_new = datetime.datetime.strptime(course_day, "%Y-%m-%d %H:%M:%S")
 			course_time = words[5]
 			course_time = course_time.replace("\n","")
 			faculty_temp = CourseTimings()
 			faculty_temp.email = email
 			faculty_temp.course_id = course_id
 			faculty_temp.course_name = course_name
-			faculty_temp.course_sem = course_sem
-			faculty_temp.course_day = course_day
+			faculty_temp.course_year = course_sem
+			faculty_temp.course_day = course_day_new
 			faculty_temp.course_time = course_time
 		
 			faculty_temp.put()
@@ -220,8 +219,5 @@ app = webapp2.WSGIApplication([
 	('/submitFeedback', SubmitFeedback),
 	('/facultySemCourse', FacultySemCourse),
 	('/facultyCourseTimings', FacultyCourseTimings),
-<<<<<<< HEAD
 	('/facultyFeedbackReport', FacultyFeedbackReport)
-=======
->>>>>>> 8313c7a7ec42e8c834eabfccb9fc59bb1ce02238
 ], debug=True)

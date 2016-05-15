@@ -5,6 +5,10 @@ from google.appengine.ext import ndb
 import jinja2
 import webapp2
 from course_feedback import CourseFeedback
+import time
+import datetime
+from datetime import date
+from datetime import datetime
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -21,8 +25,8 @@ class CourseTimings(ndb.Model):
 	email=ndb.StringProperty(indexed=True, required=True)
 	course_id=ndb.StringProperty(indexed=True)
 	course_name=ndb.StringProperty()
-	course_sem=ndb.StringProperty(indexed=True)
-	course_day=ndb.StringProperty()
+	course_year=ndb.StringProperty(indexed=True)
+	course_day=ndb.DateTimeProperty()#ndb.StringProperty()
 	course_time=ndb.StringProperty()
 	
 class FacultyHome(webapp2.RequestHandler):
@@ -64,7 +68,7 @@ class FacultyCourseTimings(webapp2.RequestHandler):
 
 		course_query = CourseTimings.query(CourseTimings.email == user_email, 
 						CourseTimings.course_id == user_course, 
-						CourseTimings.course_sem == user_sem)
+						CourseTimings.course_year == user_sem)
 		course_fetched = course_query.fetch()
 
 		template_values={
@@ -78,16 +82,29 @@ class FacultyCourseTimings(webapp2.RequestHandler):
 
 class FacultyFeedbackReport(webapp2.RequestHandler):
 	def post(self):
-		#user_email = self.request.get('user_email')
-		#user_course = self.request.get('course_id')
+		user_email = self.request.get('user_email')
+		user_course = self.request.get('course_id')
 		user_date = self.request.get('course_day')
+		user_date = datetime.strptime(user_date, '%Y-%m-%d')
+		user_date2 = datetime.combine(user_date, datetime.min.time())
+		user_date3 = datetime.combine(user_date, datetime.max.time())
+		
 
-		course_query = CourseFeedback.query(CourseFeedback.date_time == user_date)
+		
+		course_query = CourseFeedback.query(CourseFeedback.course == user_course)
+		course_query2 = course_query.filter(CourseFeedback.date_time >= user_date2)
+		course_query3 = course_query2.filter(CourseFeedback.date_time <= user_date3)
+		course_fetched = course_query3.fetch()
+		
+		'''
+		course_query = CourseFeedback.query()
 		course_fetched = course_query.fetch()
+		'''
 
 		template_values={
 			'user_email' : user_email,
-			'courses' : course_fetched
+			'courses' : course_fetched,
+			'user_date' : user_date
 		}
 
 		template = JINJA_ENVIRONMENT.get_template('facultyFeedbackReport.html')

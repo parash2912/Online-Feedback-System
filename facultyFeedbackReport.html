@@ -14,8 +14,8 @@
           <h1>Course Evaluation System</h1>
           </div>
         </div>
-		<div id="enrolled">Days for this course in this semester:<br/><br/><br/></div>
-		<form id='feedback-{{ course.course }}' action='/facultyGenerate' method='POST'>
+		<div id="enrolled">Feedbacks : <br/><br/><br/></div>
+		<form id='feedback' action='/facultyGenerate' method='POST'>
 		<table class="table table-striped">
 		<tr>
 		<td align="center"><h4> Instructor Ability </h4></td>
@@ -31,31 +31,23 @@
 		</tr>
 		{% for course in courses: %}
 			<tr>
-		    <td align="center">{{ course.1 }}</td>
-    		<td align="center">{{ course.2 }}</a></td>
-		    <td align="center">{{ course.3 }}</td>
-		    <td align="center">{{ course.4 }}</td>
-		    <td align="center">{{ course.5 }}</td>
-		    <td align="center">{{ course.6 }}</td>
-			<td align="center">{{ course.7 }}</td>
-			<td align="center">{{ course.8 }}</td>
-			<td align="center">{{ course.9 }}</td>
-			<td align="center">{{ course.10 }}</td>		
+			<!--<td align="center">{{ user_date }}</td>
+			<td align="center">{{ course.date_time }}</td>-->
+		    <td align="center">{{ course.instructor_ability }}</td>
+    		<td align="center">{{ course.clarity }}</a></td>
+		    <td align="center">{{ course.blackboard }}</td>
+		    <td align="center">{{ course.lecture_quality }}</td>
+		    <td align="center">{{ course.prepare_degree }}</td>
+		    <td align="center">{{ course.instructor_rating }}</td>
+			<td align="center">{{ course.textbook_usefulness }}</td>
+			<td align="center">{{ course.difficulty }}</td>
+			<td align="center">{{ course.coursework_amount }}</td>
+			<td align="center">{{ course.pace }}</td>		
 		    </tr>
 		{% endfor %}
 		</table>
 		</form>
 		</div>
-
-		<!--
-        <div id="rows">
-		
-		
-		<a href='#' onclick=document.getElementById('feedback-{{course.course_id}}').submit()>{{course.course_day}}</a> 
-        </div>
-        <br/>
-        -->
-		
         <div id="lower-padding">
 		<br/><div id="buttonlink"><a href="/" style="color: #333;">Logout</a></div>
         </div>
