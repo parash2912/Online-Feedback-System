@@ -14,7 +14,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
 	extensions=['jinja2.ext.autoescape'],
 	autoescape=True)
-	
+
 class CoursesTaken(ndb.Model):
 	email=ndb.StringProperty(indexed=True, required=True)
 	name=ndb.StringProperty()
@@ -28,7 +28,7 @@ class CourseTimings(ndb.Model):
 	course_year=ndb.StringProperty(indexed=True)
 	course_day=ndb.DateTimeProperty()#ndb.StringProperty()
 	course_time=ndb.StringProperty()
-	
+
 class FacultyHome(webapp2.RequestHandler):
 	def post(self):
 		user_email = self.request.get('user_email')
@@ -38,7 +38,7 @@ class FacultyHome(webapp2.RequestHandler):
 			'user_email': user_email,
 			'courses': course_fetched
 		}
-		
+
 		template = JINJA_ENVIRONMENT.get_template('facultyHome.html')
 		self.response.write(template.render(template_values))
 
@@ -66,8 +66,8 @@ class FacultyCourseTimings(webapp2.RequestHandler):
 		user_course = self.request.get('course_id')
 		user_sem = self.request.get('sem')
 
-		course_query = CourseTimings.query(CourseTimings.email == user_email, 
-						CourseTimings.course_id == user_course, 
+		course_query = CourseTimings.query(CourseTimings.email == user_email,
+						CourseTimings.course_id == user_course,
 						CourseTimings.course_year == user_sem)
 		course_fetched = course_query.fetch()
 
@@ -88,14 +88,14 @@ class FacultyFeedbackReport(webapp2.RequestHandler):
 		user_date = datetime.strptime(user_date, '%Y-%m-%d')
 		user_date2 = datetime.combine(user_date, datetime.min.time())
 		user_date3 = datetime.combine(user_date, datetime.max.time())
-		
 
-		
+
+
 		course_query = CourseFeedback.query(CourseFeedback.course == user_course)
 		course_query2 = course_query.filter(CourseFeedback.date_time >= user_date2)
 		course_query3 = course_query2.filter(CourseFeedback.date_time <= user_date3)
 		course_fetched = course_query3.fetch()
-		
+
 		'''
 		course_query = CourseFeedback.query()
 		course_fetched = course_query.fetch()

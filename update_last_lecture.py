@@ -11,13 +11,13 @@ class update_last_lecture_thread (threading.Thread):
 	def __init__(self, threadID):
 		threading.Thread.__init__(self)
 		self.threadID = threadID
-	
+
 	def run(self):
-		while True:	
+		while True:
 			date_time = datetime.now()
 			course_timings_query = CourseTimings.query(CourseTimings.course_sem==current_sem)
 			course_timings = course_timings_query.fetch()
-			
+
 			if len(course_timings) > 0:
 				for course_timing in course_timings:
 					str_weekday = date_time.strftime('%A')
@@ -37,5 +37,5 @@ class update_last_lecture_thread (threading.Thread):
 							last.course=course_timing.course_id
 							last.datetime=date_time
 							last.put()
-							
+
 			time.sleep(2)

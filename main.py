@@ -21,7 +21,7 @@ import thread
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import webapp2
-import jinja2 
+import jinja2
 import logging
 import datetime
 from user_authentication import Auth
@@ -61,7 +61,7 @@ def load_user_pass():
 			user_temp.password = password
 			user_temp.type = type
 			user_temp.put()
-	
+
 load_user_pass()
 
 #delete_thread=delete_feedback_submission_thread(1)
@@ -86,7 +86,7 @@ def load_student_courses():
 			course_index=0;
 			student_temp.courses_enrolled = courseList
 			student_temp.put()
-	
+
 load_student_courses()
 
 def load_faculty_courses():
@@ -107,7 +107,7 @@ def load_faculty_courses():
 			faculty_temp.course_taken = course;
 			faculty_temp.course_sem = courseSem;
 			faculty_temp.put()
-		
+
 load_faculty_courses()
 
 
@@ -134,9 +134,9 @@ def load_faculty_course_timings():
 			faculty_temp.course_year = course_sem
 			faculty_temp.course_day = course_day_new
 			faculty_temp.course_time = course_time
-		
+
 			faculty_temp.put()
-				
+
 load_faculty_course_timings()
 
 class CreateFeedback(webapp2.RequestHandler):
@@ -149,7 +149,7 @@ class CreateFeedback(webapp2.RequestHandler):
 		}
 		template = JINJA_ENVIRONMENT.get_template('feedbackForm.html')
 		self.response.write(template.render(template_values))
-		
+
 class SubmitFeedback(webapp2.RequestHandler):
 	def post(self):
 		user_email=self.request.get('user_email')
@@ -158,10 +158,10 @@ class SubmitFeedback(webapp2.RequestHandler):
 		student_submitted.email = user_email
 		student_submitted.course = course
 		student_submitted.put()
-		
+
 		last_lecture_query = CourseLastLecture.query(CourseLastLecture.course==course)
 		last_lecture_list = last_lecture_query.fetch()
-		
+
 		courseFeedback = CourseFeedback()
 		courseFeedback.course = course
 		courseFeedback.instructor_ability=int(self.request.get('instructor_ability'))
@@ -182,8 +182,8 @@ class SubmitFeedback(webapp2.RequestHandler):
 		}
 		template = JINJA_ENVIRONMENT.get_template('index.html')
 		self.response.write(template.render(template_values))
-		
-		
+
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
 		#self.response.write('Hello world!')
@@ -192,13 +192,13 @@ class MainHandler(webapp2.RequestHandler):
 			url=users.create_logout_url(self.request.uri)
 			url_linktext='Logout'
 			user1=user
-			
+
 			template_values={
 				'user': user,
 				'url': url,
 				'url_linktext': url_linktext
 			}
-			
+
 			template = JINJA_ENVIRONMENT.get_template('index.html')
 			self.response.write(template.render(template_values))
 		else:
@@ -206,10 +206,10 @@ class MainHandler(webapp2.RequestHandler):
 				'logged': 'false',
 				'prev_attempt': 'false'
 			}
-			
+
 			template = JINJA_ENVIRONMENT.get_template('login.html')
 			self.response.write(template.render(template_values))
-			
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
 	('/login', Auth),

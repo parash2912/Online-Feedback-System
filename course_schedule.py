@@ -9,7 +9,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
 	extensions=['jinja2.ext.autoescape'],
 	autoescape=True)
-	
+
 class CourseSchedule(ndb.Model):
 	course = ndb.StringProperty(indexed=True)
 	startDate = ndb.DateTimeProperty()

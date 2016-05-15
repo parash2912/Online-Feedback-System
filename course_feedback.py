@@ -9,7 +9,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
 	extensions=['jinja2.ext.autoescape'],
 	autoescape=True)
-	
+
 class CourseFeedback(ndb.Model):
 	course=ndb.StringProperty(indexed=True, required=True)
 	instructor_ability=ndb.IntegerProperty()
@@ -23,7 +23,7 @@ class CourseFeedback(ndb.Model):
 	coursework_amount=ndb.IntegerProperty()
 	pace=ndb.IntegerProperty()
 	date_time=ndb.DateTimeProperty(auto_now_add=True)
-	
+
 class CourseLastLecture(ndb.Model):
 	course=ndb.StringProperty(indexed=True,required=True)
 	datetime=ndb.DateTimeProperty()
