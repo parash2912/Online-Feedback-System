@@ -23,7 +23,7 @@ class CourseFeedback(ndb.Model):
 	difficulty=ndb.IntegerProperty()
 	coursework_amount=ndb.IntegerProperty()
 	pace=ndb.IntegerProperty()
-	date_time=ndb.DateTimeProperty(auto_now_add=True)
+	date_time=ndb.StringProperty(indexed=True)
 
 class CourseLastLecture(ndb.Model):
 	course=ndb.StringProperty(indexed=True,required=True)

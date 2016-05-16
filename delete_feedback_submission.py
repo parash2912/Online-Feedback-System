@@ -43,7 +43,7 @@ class delete_feedback_submission_thread (threading.Thread):
 			for stud_sub in student_submitted:
 
 				stud_course = stud_sub.course
-				course_timings_query = CourseTimings.query(CourseTimings.course_id==stud_course,CourseTimings.course_sem==current_sem)
+				course_timings_query = CourseTimings.query(CourseTimings.course_id==stud_course,CourseTimings.course_year==current_sem)
 				course_timings = course_timings_query.fetch()
 
 				if len(course_timings) > 0:

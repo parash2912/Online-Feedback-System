@@ -15,7 +15,7 @@ class update_last_lecture_thread (threading.Thread):
 	def run(self):
 		while True:
 			date_time = datetime.now()
-			course_timings_query = CourseTimings.query(CourseTimings.course_sem==current_sem)
+			course_timings_query = CourseTimings.query(CourseTimings.course_year==current_sem)
 			course_timings = course_timings_query.fetch()
 
 			if len(course_timings) > 0:

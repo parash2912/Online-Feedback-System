@@ -73,6 +73,36 @@ delete_thread.start()
 update_thread=update_last_lecture_thread(2)
 update_thread.start()
 
+
+
+def load_faculty_course_timings():
+	course_timings_query=CourseTimings.query()
+	course_timings=course_timings_query.fetch()
+	if len(course_timings)==0:
+		lines=list(open(os.path.join(os.path.split(__file__)[0], 'facultyCourseTimings.txt')))
+		for line in lines:
+			words = line.split("\t")
+			email = words[0]
+			course_id = words[1]
+			course_name = words[2]
+			course_sem = words[3]
+			course_day = words[4]
+			#course_day_new = datetime.strptime(course_day, "%Y-%m-%d %H:%M:%S")
+			course_time = words[5]
+			course_time = course_time.replace("\n","")
+			faculty_temp = CourseTimings()
+			faculty_temp.email = email
+			faculty_temp.course_id = course_id
+			faculty_temp.course_name = course_name
+			faculty_temp.course_year = course_sem
+			faculty_temp.course_day = course_day
+			faculty_temp.course_time = course_time
+
+			faculty_temp.put()
+
+load_faculty_course_timings()
+
+
 def load_student_courses():
 	courses_enrolled_query=CoursesEnrolled.query()
 	courses_enrolled_list=courses_enrolled_query.fetch()
@@ -112,35 +142,6 @@ def load_faculty_courses():
 			faculty_temp.put()
 
 load_faculty_courses()
-
-
-
-def load_faculty_course_timings():
-	course_timings_query=CourseTimings.query()
-	course_timings=course_timings_query.fetch()
-	if len(course_timings)==0:
-		lines=list(open(os.path.join(os.path.split(__file__)[0], 'facultyCourseTimings.txt')))
-		for line in lines:
-			words = line.split("\t")
-			email = words[0]
-			course_id = words[1]
-			course_name = words[2]
-			course_sem = words[3]
-			course_day = words[4]
-			#course_day_new = datetime.strptime(course_day, "%Y-%m-%d %H:%M:%S")
-			course_time = words[5]
-			course_time = course_time.replace("\n","")
-			faculty_temp = CourseTimings()
-			faculty_temp.email = email
-			faculty_temp.course_id = course_id
-			faculty_temp.course_name = course_name
-			faculty_temp.course_year = course_sem
-			faculty_temp.course_day = course_day
-			faculty_temp.course_time = course_time
-
-			faculty_temp.put()
-
-load_faculty_course_timings()
 
 
 def initialize_last_lectures():
@@ -195,7 +196,7 @@ class SubmitFeedback(webapp2.RequestHandler):
 		courseFeedback.difficulty=int(self.request.get('difficulty'))
 		courseFeedback.coursework_amount=int(self.request.get('coursework_amount'))
 		courseFeedback.pace=int(self.request.get('pace'))
-		courseFeedback.date_time=last_lecture_list[0].datetime
+		courseFeedback.date_time=str(last_lecture_list[0].datetime.strftime("%Y-%m-%d"))
 		courseFeedback.sem=current_sem
 		courseFeedback.put()
 		template_values = {

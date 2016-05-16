@@ -76,9 +76,8 @@ class FacultyCourseTimings(webapp2.RequestHandler):
 		dates=[]
 		for feedback in feedbacks:
 			date_time=feedback.date_time
-			date=date_time.strftime("%Y-%m-%d")
-			if date not in dates:
-				dates.append(date)
+			if date_time not in dates:
+				dates.append(date_time)
 			
 		template_values={
 			'user_email' : user_email,
@@ -96,16 +95,8 @@ class FacultyFeedbackReport(webapp2.RequestHandler):
 		user_email = self.request.get('user_email')
 		user_course = self.request.get('course_id')
 		user_date = self.request.get('course_day')
-		user_date = datetime.strptime(user_date, '%Y-%m-%d')
-		user_date2 = datetime.combine(user_date, datetime.min.time())
-		user_date3 = datetime.combine(user_date, datetime.max.time())
-
-
-
-		course_query = CourseFeedback.query(CourseFeedback.course == user_course)
-		course_query2 = course_query.filter(CourseFeedback.date_time >= user_date2)
-		course_query3 = course_query2.filter(CourseFeedback.date_time <= user_date3)
-		course_fetched = course_query3.fetch()
+		course_query = CourseFeedback.query(CourseFeedback.course == user_course,CourseFeedback.date_time==user_date)
+		course_fetched = course_query.fetch()
 
 		'''
 		course_query = CourseFeedback.query()
