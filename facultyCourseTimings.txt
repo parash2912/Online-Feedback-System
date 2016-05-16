@@ -1,4 +1,4 @@
-jcf@nyu.edu	CSCI-GA.001	Software Engineering	F2014	Monday	19:00:00-21:00:00
+jcf@nyu.edu	CSCI-GA.001	Software Engineering	F2016	Monday	19:00:00-21:00:00
 jcf@nyu.edu	CSCI-GA.003	Software Engineering	S2011	Tuesday	19:00:00-21:00:00
 jcf@nyu.edu	CSCI-GA.002	Software Engineering	F2011	Thursday	19:00:00-21:00:00
 jcf@nyu.edu	CSCI-GA.003	Software Engineering	SU2014	Wednesday	17:00:00-19:00:00
