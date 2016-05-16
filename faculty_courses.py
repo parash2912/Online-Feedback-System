@@ -78,12 +78,12 @@ class FacultyCourseTimings(webapp2.RequestHandler):
 			date_time=feedback.date_time
 			if date_time not in dates:
 				dates.append(date_time)
-			
+
 		template_values={
 			'user_email' : user_email,
 			'course_id' : user_course,
 			'course_sem' : user_sem,
-			'dates' : dates 
+			'dates' : dates
 		}
 
 		template = JINJA_ENVIRONMENT.get_template('facultyCourseTimings.html')

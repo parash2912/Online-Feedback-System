@@ -45,7 +45,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
 	extensions=['jinja2.ext.autoescape'],
 	autoescape=True)
-	
+
 current_sem='F2016'
 
 def load_user_pass():
@@ -157,7 +157,7 @@ def initialize_last_lectures():
 				last_lect.course=course.course_id
 				last_lect.datetime=date_sem_start
 				last_lect.put()
-			
+
 initialize_last_lectures()
 
 

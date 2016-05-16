@@ -13,7 +13,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 	autoescape=True)
 
 current_sem='F2016'
-	
+
 class CoursesEnrolled(ndb.Model):
 	email=ndb.StringProperty(indexed=True, required=True)
 	courses_enrolled=ndb.StringProperty()
@@ -35,7 +35,7 @@ class StudentHome(webapp2.RequestHandler):
 				for course_timing in course_timings:
 					if course_timing.course_id==course:
 						courses_final.append(course)
-						
+
 		feedback_query = StudentSubmitted.query(StudentSubmitted.email == user_email)
 		feedback_submitted = feedback_query.fetch()
 

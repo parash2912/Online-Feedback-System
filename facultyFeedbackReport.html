@@ -17,25 +17,25 @@
 		<div id="enrolled">Feedbacks:<br/><br/><br/></div>
         <div id="rows">
 		<form id='feedback' action='/facultyGenerate' method='POST'>
-		<table class="table table-striped">
+		<table class="table table-striped" border="1" style="width: 100%">
 		<tr>
-		<td align="center"><h4> Instructor Ability </h4></td>
-		<td align="center"><h4> Clarity </h4></td>
-		<td align="center"><h4> Blackboard </h4></td>
-		<td align="center"><h4> Lecture Quality </h4></td>
-		<td align="center"><h4> Prepared Degree </h4></td>
-		<td align="center"><h4> Instructor Ratings </h4></td>
-		<td align="center"><h4> Textbook Usefulness </h4></td>
-		<td align="center"><h4> Difficulty </h4></td>
-		<td align="center"><h4> Coursework Amount </h4></td>
-		<td align="center"><h4> Pace </h4></td>
+		<td align="center">Instructor Ability</td>
+		<td align="center">Clarity</td>
+		<td align="center">Blackboard</td>
+		<td align="center">Lecture Quality</td>
+		<td align="center">Prepared Degree</td>
+		<td align="center">Instructor Ratings</td>
+		<td align="center">Textbook Usefulness</td>
+		<td align="center">Difficulty</td>
+		<td align="center">Coursework Amount</td>
+		<td align="center">Pace</td>
 		</tr>
 		{% for course in courses: %}
 			<tr>
 			<!--<td align="center">{{ user_date }}</td>
 			<td align="center">{{ course.date_time }}</td>-->
 		    <td align="center">{{ course.instructor_ability }}</td>
-    		<td align="center">{{ course.clarity }}</a></td>
+    		<td align="center">{{ course.clarity }}</td>
 		    <td align="center">{{ course.blackboard }}</td>
 		    <td align="center">{{ course.lecture_quality }}</td>
 		    <td align="center">{{ course.prepare_degree }}</td>
@@ -50,8 +50,9 @@
 		</form>
         </div>
         <br/>
+        <br/>
         <div id="lower-padding">
-		<br/><div id="buttonlink"><a href="/" style="color: #333;">Logout</a></div>
+		<div id="buttonlink"><a href="/" style="color: #333;">Logout</a></div>
         </div>
       </div>
 	</body>
