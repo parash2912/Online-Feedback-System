@@ -1,4 +1,4 @@
-jcf@nyu.edu	Jean Claude Franchitti	CSCI-GA.001	F2014
+jcf@nyu.edu	Jean Claude Franchitti	CSCI-GA.001	F2016
 pcb@nyu.edu	Prithvi Raj Chauhan	CSCI-GA.004	S2015
 mno@nyu.edu	Manmohan Singh	CSCI-GA.005	SU2010
 jcf@nyu.edu	Jean Claude Franchitti	CSCI-GA.002	F2011
